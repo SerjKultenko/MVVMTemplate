@@ -13,10 +13,17 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  private var mainRouter: MainRouter?
+  private var appState: StateStorage?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    appState = StateStorage()
+    mainRouter = MainRouter(withStateStorage: appState!)
+    let mainVC = mainRouter!.getLoginViewController()
+    self.window?.rootViewController = mainVC
+    self.window?.makeKeyAndVisible()
+
     return true
   }
 
