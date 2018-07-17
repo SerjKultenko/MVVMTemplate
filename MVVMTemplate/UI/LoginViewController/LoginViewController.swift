@@ -28,6 +28,8 @@ class LoginViewController: UIViewController, ISignalsProcessingViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    configureControlls()
     if viewModel != nil {
       bindSignalProcessing(forBaseViewModel: viewModel!)
     }
@@ -36,6 +38,12 @@ class LoginViewController: UIViewController, ISignalsProcessingViewController {
 
   
   // MARK: - Utility Functions
+  
+  private func configureControlls() {
+    userNameField.text = viewModel?.userName ?? ""
+    passwordField.text = viewModel?.password ?? ""
+  }
+  
   private func reactiveBindings() {
     viewModel?.canSignIn
       .observeOn(MainScheduler.instance)

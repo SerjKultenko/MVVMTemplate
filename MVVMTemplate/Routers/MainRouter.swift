@@ -32,7 +32,10 @@ struct MainRouter {
       return
     }
     
-    let vc = UIViewController()
+    let vc = NewsViewController()
+    let newsService = MockNewsService()
+    let viewModel = NewsViewModel(withRouter: self, withNewsService: newsService)
+    vc.viewModel = viewModel
     
     UIView.transition(with: window, duration: 0.35, options: .transitionCrossDissolve, animations: {
       window.rootViewController = UINavigationController(rootViewController: vc)

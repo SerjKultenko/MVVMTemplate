@@ -10,4 +10,5 @@ import Foundation
 
 class StateStorage {
   var authenticationToken: AuthenticationToken?
+  var userInfo: UserInfo?
 }

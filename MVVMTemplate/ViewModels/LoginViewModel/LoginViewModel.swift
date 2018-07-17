@@ -12,7 +12,7 @@ import RxSwift
 class LoginViewModel: BaseViewModel {
   
   // MARK: - Vars
-  var loginService: ILoginService
+  private var loginService: ILoginService
   
   var userName: String = "" {
     didSet {
@@ -44,24 +44,36 @@ class LoginViewModel: BaseViewModel {
     observable
       .observeOn(MainScheduler.instance)
       .subscribe { [weak self] event in
-      guard let strongSelf = self else { return }
-      
-      switch event {
-      case let .next(authenticationToken):
-        strongSelf.router.appState.authenticationToken = authenticationToken
-        strongSelf.showHUDSignal.onNext(false)
-        strongSelf.router.switchToMainScreen()
-      case let .error(error):
-        strongSelf.showHUDSignal.onNext(false)
-        strongSelf.showErrorAlertSignal.onNext("Sign Up Error: " + error.localizedDescription)
-      default:
-        break
-      }
+        guard let strongSelf = self else { return }
+        
+        switch event {
+        case let .next(authenticationToken):
+          strongSelf.router.appState.authenticationToken = authenticationToken
+          strongSelf.router.appState.userInfo = UserInfo(userName: strongSelf.userName)
+          
+          strongSelf.showHUDSignal.onNext(false)
+          strongSelf.router.switchToMainScreen()
+        case let .error(error):
+          strongSelf.router.appState.authenticationToken = nil
+          strongSelf.router.appState.userInfo = nil
+          
+          strongSelf.showHUDSignal.onNext(false)
+          strongSelf.showErrorAlertSignal.onNext("Sign Up Error: " + error.localizedDescription)
+        default:
+          break
+        }
       }.disposed(by: disposeBag)
   }
 
+  // MARK: - Initialization
   init(withRouter router: MainRouter, withLoginService loginService: ILoginService) {
     self.loginService = loginService
     super.init(with: router)
+    
+    #if DEBUG
+    userName = "name"
+    password = "password"
+    canSignIn.onNext(fieldsAreValid())
+    #endif
   }
 }

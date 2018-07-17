@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sergei Kultenko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RxSwift
 
 class MockLoginService: ILoginService {
