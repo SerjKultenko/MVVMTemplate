@@ -61,7 +61,7 @@ class NewsViewModel: BaseViewModel {
   }
   
   // MARK: - Initialization
-  init(withRouter router: MainRouter, withNewsService newsService: INewsService) {
+  init(withRouter router: IMainRouter, withNewsService newsService: INewsService) {
     self.newsService = newsService
     super.init(with: router)
   }

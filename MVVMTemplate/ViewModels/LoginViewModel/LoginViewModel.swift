@@ -66,7 +66,7 @@ class LoginViewModel: BaseViewModel {
   }
 
   // MARK: - Initialization
-  init(withRouter router: MainRouter, withLoginService loginService: ILoginService) {
+  init(withRouter router: IMainRouter, withLoginService loginService: ILoginService) {
     self.loginService = loginService
     super.init(with: router)
     

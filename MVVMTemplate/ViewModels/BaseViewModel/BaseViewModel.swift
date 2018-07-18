@@ -11,7 +11,7 @@ import RxSwift
 
 class BaseViewModel {
   // Router
-  var router: MainRouter
+  var router: IMainRouter
   
   // Subjects to signal to View Controller
   var showHUDSignal = BehaviorSubject<Bool>(value: false)
@@ -22,7 +22,7 @@ class BaseViewModel {
   let disposeBag = DisposeBag()
   
   // MARK: - Initalization
-  init(with router:MainRouter) {
+  init(with router: IMainRouter) {
     self.router = router
   }
   

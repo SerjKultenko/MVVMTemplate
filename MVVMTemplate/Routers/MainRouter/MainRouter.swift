@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct MainRouter {
+class MainRouter: IMainRouter {
   // MARK: - Vars
   let appState: StateStorage
   

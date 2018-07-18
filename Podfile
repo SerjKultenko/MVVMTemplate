@@ -16,9 +16,8 @@ target 'MVVMTemplate' do
 end
 
 def testing_pods
-#  pod 'Nimble', '~> 6.1'
-#  pod 'Quick', '~> 1.1'
   mainPods
+  pod 'RxTest', '~>4.0'
 end
 
 target 'MVVMTemplateTests' do
