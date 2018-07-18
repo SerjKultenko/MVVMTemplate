@@ -48,11 +48,9 @@ class NewsViewModel: BaseViewModel {
           strongSelf.news = latestNews
           
           strongSelf.showHUDSignal.onNext(false)
-          strongSelf.reloadDataSignal.onNext(true)
         case let .error(error):
           strongSelf.news = []
           strongSelf.showHUDSignal.onNext(false)
-          strongSelf.reloadDataSignal.onNext(true)
           strongSelf.showErrorAlertSignal.onNext("News Updating Error: " + error.localizedDescription)
         default:
           break

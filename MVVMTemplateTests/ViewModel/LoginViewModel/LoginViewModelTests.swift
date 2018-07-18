@@ -41,7 +41,9 @@ class LoginViewModelTests: XCTestCase {
   }
   
   override func tearDown() {
+    mainRouter = nil
     viewModel = nil
+    disposeBag = nil
 
     super.tearDown()
   }

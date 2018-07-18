@@ -12,6 +12,7 @@
 		E4531D1D20FEDF9A00589CFF /* IMainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4531D1C20FEDF9A00589CFF /* IMainRouter.swift */; };
 		E4531D2120FEE19600589CFF /* MockMainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4531D2020FEE19600589CFF /* MockMainRouter.swift */; };
 		E4531D2420FEE31200589CFF /* TestsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4531D2320FEE31200589CFF /* TestsConstants.swift */; };
+		E4531D2720FF147100589CFF /* NewsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4531D2620FF147100589CFF /* NewsViewModelTests.swift */; };
 		E4899A0620FC8FDF006D464C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4899A0520FC8FDF006D464C /* UIViewController+Extensions.swift */; };
 		E494A84020F87E1D00B8C3D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E494A83F20F87E1D00B8C3D1 /* AppDelegate.swift */; };
 		E494A84420F87E3800B8C3D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E494A84320F87E3800B8C3D1 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		E4531D1C20FEDF9A00589CFF /* IMainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMainRouter.swift; sourceTree = "<group>"; };
 		E4531D2020FEE19600589CFF /* MockMainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainRouter.swift; sourceTree = "<group>"; };
 		E4531D2320FEE31200589CFF /* TestsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsConstants.swift; sourceTree = "<group>"; };
+		E4531D2620FF147100589CFF /* NewsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModelTests.swift; sourceTree = "<group>"; };
 		E4899A0520FC8FDF006D464C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		E494A83D20F87E0900B8C3D1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E494A83F20F87E1D00B8C3D1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 				E4531D2320FEE31200589CFF /* TestsConstants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E4531D2520FF145300589CFF /* NewsViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E4531D2620FF147100589CFF /* NewsViewModelTests.swift */,
+			);
+			path = NewsViewModel;
 			sourceTree = "<group>";
 		};
 		E494A83520F87C3C00B8C3D1 /* Application Layer */ = {
@@ -361,6 +371,7 @@
 		E4C1C15520FDD40900C6F80B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E4531D2520FF145300589CFF /* NewsViewModel */,
 				E4C1C15620FDD45500C6F80B /* LoginViewModel */,
 			);
 			path = ViewModel;
@@ -700,6 +711,7 @@
 				E4C1C15820FDD47E00C6F80B /* LoginViewModelTests.swift in Sources */,
 				E4531D2120FEE19600589CFF /* MockMainRouter.swift in Sources */,
 				E4531D2420FEE31200589CFF /* TestsConstants.swift in Sources */,
+				E4531D2720FF147100589CFF /* NewsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
