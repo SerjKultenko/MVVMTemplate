@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "New-Tag-1_48px.png",
+      "filename" : "icon-exit.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icon-exit@2x.png",
       "scale" : "2x"
     },
     {

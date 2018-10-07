@@ -13,17 +13,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-  private var mainRouter: IMainRouter?
-  private var appState: StateStorage?
+  private var appState: StateStorage = StateStorage()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    appState = StateStorage()
-    mainRouter = MainRouter(withStateStorage: appState!)
-    let mainVC = mainRouter!.getLoginViewController()
-    self.window?.rootViewController = mainVC
+    
+    let router = LoginRouter()
+    let rootVCContext = RootVCContext(appState: self.appState, window: self.window!)
+    router.present(on: nil, context: rootVCContext, animated: true, completion: nil)
+    
     self.window?.makeKeyAndVisible()
-
     return true
   }
 

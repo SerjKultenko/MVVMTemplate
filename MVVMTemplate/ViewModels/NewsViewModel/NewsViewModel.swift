@@ -58,8 +58,12 @@ class NewsViewModel: BaseViewModel {
       }.disposed(by: disposeBag)
   }
   
+  func logoutAction() {
+    router.route(with: NewsRouter.RouteType.gotoLoginScreen)
+  }
+  
   // MARK: - Initialization
-  init(withRouter router: IMainRouter, withNewsService newsService: INewsService) {
+  init(withRouter router: IRouter, withNewsService newsService: INewsService) {
     self.newsService = newsService
     super.init(with: router)
   }

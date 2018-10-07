@@ -13,7 +13,8 @@ class LoginViewModel: BaseViewModel {
   
   // MARK: - Vars
   private var loginService: ILoginService
-  
+  private var appState: StateStorage
+
   var userName: String = "" {
     didSet {
       canSignIn.onNext(fieldsAreValid())
@@ -48,17 +49,17 @@ class LoginViewModel: BaseViewModel {
         
         switch event {
         case let .next(authenticationToken):
-          strongSelf.router.appState.authenticationToken = authenticationToken
-          strongSelf.router.appState.userInfo = UserInfo(userName: strongSelf.userName)
+          strongSelf.appState.authenticationToken = authenticationToken
+          strongSelf.appState.userInfo = UserInfo(userName: strongSelf.userName)
           
           strongSelf.showHUDSignal.onNext(false)
-          strongSelf.router.switchToMainScreen()
+          strongSelf.router.route(with: LoginRouter.RouteType.showNewsList)
         case let .error(error):
-          strongSelf.router.appState.authenticationToken = nil
-          strongSelf.router.appState.userInfo = nil
+          strongSelf.appState.authenticationToken = nil
+          strongSelf.appState.userInfo = nil
           
           strongSelf.showHUDSignal.onNext(false)
-          strongSelf.showErrorAlertSignal.onNext("Sign Up Error: " + error.localizedDescription)
+          strongSelf.showErrorAlertSignal.onNext("Sign In Error: " + error.localizedDescription)
         default:
           break
         }
@@ -66,8 +67,9 @@ class LoginViewModel: BaseViewModel {
   }
 
   // MARK: - Initialization
-  init(withRouter router: IMainRouter, withLoginService loginService: ILoginService) {
+  init(withRouter router: IRouter, appState: StateStorage, withLoginService loginService: ILoginService) {
     self.loginService = loginService
+    self.appState = appState
     super.init(with: router)
     
     #if DEBUG

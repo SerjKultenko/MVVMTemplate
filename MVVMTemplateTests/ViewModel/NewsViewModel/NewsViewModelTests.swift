@@ -39,7 +39,7 @@ class NewsViewModelTests: XCTestCase {
   }
 
   var viewModel: NewsViewModel?
-  var mainRouter: MockMainRouter?
+  var mainRouter: MockRouter?
   var newsService: NewsServiceMock?
   var disposeBag: DisposeBag?
   
@@ -48,7 +48,7 @@ class NewsViewModelTests: XCTestCase {
     
     self.disposeBag = DisposeBag()
     self.newsService = NewsServiceMock()
-    self.mainRouter = MockMainRouter()
+    self.mainRouter = MockRouter()
     self.viewModel = NewsViewModel(withRouter: mainRouter!, withNewsService: newsService!)
   }
   

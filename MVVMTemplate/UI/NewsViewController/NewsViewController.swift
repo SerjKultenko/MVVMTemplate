@@ -16,13 +16,14 @@ class NewsViewController: UIViewController, ISignalsProcessingViewController {
   
   // MARK: - IB Outlets
   @IBOutlet weak var tableView: UITableView!
-  
+
+  private let kNewsCellReuseIdentifier = "kNewsCellReuseIdentifier"
+
   // MARK: - View Controller Lifecycle
   override func loadView() {
     view = Bundle.main.loadNibNamed(self.classString(), owner: self, options: nil)?[0] as? UIView
   }
-
-  private let kNewsCellReuseIdentifier = "kNewsCellReuseIdentifier"
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -31,6 +32,12 @@ class NewsViewController: UIViewController, ISignalsProcessingViewController {
     }
     reactiveBindings()
 
+    let selector = #selector(NewsViewController.logoutAction)
+    let item = UIBarButtonItem(image: UIImage(named: "icon-exit"), style: .plain, target: self, action: selector)
+    navigationItem.rightBarButtonItem = item
+    navigationItem.title = "News"
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    
     self.viewModel?.reloadData()
   }
 
@@ -51,6 +58,11 @@ class NewsViewController: UIViewController, ISignalsProcessingViewController {
         }
       }).disposed(by: disposeBag)
   }
+  
+  @IBAction func logoutAction(_ sender: UIBarButtonItem) {
+    viewModel?.logoutAction()
+  }
+  
 }
 
 extension NewsViewController: UITableViewDataSource {
@@ -76,7 +88,6 @@ extension NewsViewController: UITableViewDataSource {
 
     return cell
   }
-  
 }
 
 extension NewsViewController: UITableViewDelegate {

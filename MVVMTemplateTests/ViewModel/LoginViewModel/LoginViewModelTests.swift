@@ -26,22 +26,25 @@ class LoginViewModelTests: XCTestCase {
   }
   
   var viewModel: LoginViewModel?
-  var mainRouter: MockMainRouter?
+  var router: MockRouter?
+  var appState: StateStorage = StateStorage()
   var disposeBag: DisposeBag?
-
+  
+  
   override func setUp() {
     super.setUp()
     
     self.disposeBag = DisposeBag()
     let loginService = LoginServiceMock()
-    self.mainRouter = MockMainRouter()
-    self.viewModel = LoginViewModel(withRouter: mainRouter!, withLoginService: loginService)
+    self.router = MockRouter()
+    self.appState = StateStorage()
+    self.viewModel = LoginViewModel(withRouter: router!, appState: appState, withLoginService: loginService)
     self.viewModel?.password = ""
     self.viewModel?.userName = ""
   }
   
   override func tearDown() {
-    mainRouter = nil
+    router = nil
     viewModel = nil
     disposeBag = nil
 
@@ -83,7 +86,7 @@ class LoginViewModelTests: XCTestCase {
   func testSignInActionSucceeded() {
     // Given
     let scheduler = TestScheduler(initialClock: 0)
-    self.mainRouter?.switchToMainScreenCalled = self.expectation(description: "mainRouter switchToMainScreenCalled")
+    self.router?.routeFunctionCalled = self.expectation(description: "Login router routeFunctionCalled")
     let observerHUDSignal = scheduler.createObserver(Bool.self)
     let observerErrorAlertSignal = scheduler.createObserver(String.self)
 
@@ -114,8 +117,8 @@ class LoginViewModelTests: XCTestCase {
       }
       XCTAssert(observerErrorAlertSignal.events.isEmpty)
       XCTAssertEqual(observerHUDSignal.events, correctHUDSignalValues)
-      XCTAssertEqual(safeSelf.mainRouter?.appState.authenticationToken?.token, "MockToken")
-      XCTAssertEqual(safeSelf.mainRouter?.appState.userInfo?.userName, "name")
+      XCTAssertEqual(safeSelf.appState.authenticationToken?.token, "MockToken")
+      XCTAssertEqual(safeSelf.appState.userInfo?.userName, "name")
     }
   }
 
@@ -147,14 +150,14 @@ class LoginViewModelTests: XCTestCase {
       ]
 
     let correctErrorAlertSignalValues = [
-      Recorded.next(0, "Sign Up Error: Can't Login with given UserName and Password"),
+      Recorded.next(0, "Sign In Error: Can't Login with given UserName and Password"),
       ]
 
     print("observerHUDSignal \(observerHUDSignal.events)")
     print("observerErrorAlertSignal \(observerErrorAlertSignal.events)")
     XCTAssertEqual(observerErrorAlertSignal.events, correctErrorAlertSignalValues)
     XCTAssertEqual(observerHUDSignal.events, correctHUDSignalValues)
-    XCTAssertEqual(self.mainRouter?.appState.authenticationToken?.token, nil)
-    XCTAssertEqual(self.mainRouter?.appState.userInfo?.userName, nil)
+    XCTAssertEqual(self.appState.authenticationToken?.token, nil)
+    XCTAssertEqual(self.appState.userInfo?.userName, nil)
   }
 }
